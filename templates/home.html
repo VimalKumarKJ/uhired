@@ -31,22 +31,9 @@
       <div class="mx-auto">
         <h2 class="display-6 mb-3">Openings!</h2>
         <div class="d-flex flex-column">
-          <div class="job-tab p-3 mb-2 bg-light border d-flex align-items-center">
-            <div>
-              <h5>Software Developer</h5>
-              <p class="fst-italic">Company name</p>
-              <p  class="lead fs-6">Location: Bangalore | Experience: 2+ years</p>
-            </div>
-            <button class="btn btn-outline-dark ms-auto">Apply!</button>
-          </div>
-          <div class="job-tab p-3 mb-2 bg-light border d-flex align-items-center">
-            <div>
-              <h5>Frontend Engineer</h5>
-              <p class="fst-italic">Company name</p>
-              <p class="lead fs-6">Location: Chennai | Experience: 1+ years</p>
-            </div>
-            <button class="btn btn-outline-dark ms-auto">Apply!</button>
-          </div>
+          {% for job in jobs_list %}
+            {% include 'jobs.html'%}
+          {% endfor %}
         </div>
       </div>
       <div class="my-3 py-3 d-flex flex-column">
