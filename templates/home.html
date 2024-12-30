@@ -20,7 +20,7 @@
   <body>
     {% include 'navbar.html' %}
     <div class="container-md container-fluid">
-      <div class="d-flex flex-wrap justify-content-center py-3 mb-3 border-bottom">
+      <div class="d-flex flex-wrap justify-content-center py-5 mb-2 border-bottom">
         <h1 class = "display-2">Uhired</h1>
       </div>
       <div class="text-center py-4 mb-3">
@@ -44,13 +44,11 @@
       </div>
       <div class="d-flex flex-column my-3 py-3 justify-content-center align-items-center">
         <h3 class="display-6 mb-3">Would love to get in touch with you!</h3>
-        <button class="btn btn-outline-dark">Contact Us</button>
+        <a class="btn btn-outline-dark" href="mailto:vimalkaruna29@gmail.com?subject=Getting%20in%20touch!&body=Name%3A%20%3CEnter%20your%20name%20here%3E%0D%0A%0D%0A%3CWrite%20your%20hearts%20out%3E">Contact Us</a>
       </div>
     </div>
   </body>
-  <footer class="container container-fluid">
-    <p>Copyright ©️2025</p>
-  </footer>
+  {% include 'footer.html' %}
 </html>
 
 

@@ -1,4 +1,5 @@
 from flask import Flask, render_template, jsonify
+from datetime import date
 app = Flask(__name__)
 
 JOBS = [
@@ -37,9 +38,12 @@ JOBS = [
   
 ]
 
+current_date = date.today()
+current_year = current_date.year
+
 @app.route("/")
 def hello_world():
-  return render_template('home.html', jobs_list = JOBS)
+  return render_template('home.html', jobs_list = JOBS, year = current_year)
 
 @app.route("/api/jobs")
 def api():
