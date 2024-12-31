@@ -1,22 +1,10 @@
 from flask import Flask, render_template, jsonify
-from sqlalchemy import text
 from datetime import date
-from database import engine
+from database import get_jobData_from_db
 app = Flask(__name__)
 
 current_date = date.today()
 current_year = current_date.year
-
-def get_jobData_from_db():
-  with engine.connect() as connect:
-    result = connect.execute(text("SELECT * FROM jobs"))
-    jobs= []
-    for row in result.all():
-        jobs.append(dict(row._mapping))
-    return jobs
-  
-
-
 
 @app.route("/")
 def home():
