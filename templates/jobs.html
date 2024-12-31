@@ -3,6 +3,9 @@
     <h5>{{job['title']}}</h5>
     <p class="fst-italic">{{job['Company']}}</p>
     <p  class="lead fs-6">Location: {{job['location']}} | Experience: {{job['experience']}} year(s)</p>
+    {% if  {{job['currency']}} != 'INR' %}
+      <p class="lead fw-bold fs-5">💰: {{job['salary']}}PA {{job['currency']}}</p>
+    {% endif %}
     <p class="lead fw-bold fs-5">💰: {{job['salary']}}LPA {{job['currency']}}</p>
   </div>
   <button class="btn btn-outline-dark ms-auto">Apply!</button>
