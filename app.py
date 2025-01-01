@@ -1,4 +1,5 @@
 import os
+import requests
 from flask import Flask, render_template, jsonify, request
 from datetime import date
 from database import get_jobData_from_db, get_specificJobData_from_db, store_applicant_data
@@ -33,7 +34,7 @@ def get_job(id):
 @app.route("/job/<id>/apply", methods=["POST"])
 def apply_job(id):
     data = request.form
-    hcaptcha_response = request.form.get('h-captcha-response')
+    hcaptcha_response = requests.form.get('h-captcha-response')
     if not verify_hcaptcha(hcaptcha_response):
        return render_template('error.html', message="hCaptcha verification failed. Please try again.")
     job = get_specificJobData_from_db(id)
