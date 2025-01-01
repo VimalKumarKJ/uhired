@@ -15,7 +15,7 @@ def verify_hcaptcha(hcaptcha_response):
         'secret': H_CAPTCHA_SECRET_KEY,
         'response': hcaptcha_response
     }
-    response = request.post('https://hcaptcha.com/siteverify', data=data)
+    response = requests.post('https://hcaptcha.com/siteverify', data=data)
     result = response.json()
     return result.get('success', False)
 
@@ -34,7 +34,7 @@ def get_job(id):
 @app.route("/job/<id>/apply", methods=["POST"])
 def apply_job(id):
     data = request.form
-    hcaptcha_response = requests.form.get('h-captcha-response')
+    hcaptcha_response = request.form.get('h-captcha-response')
     if not verify_hcaptcha(hcaptcha_response):
        return render_template('error.html', message="hCaptcha verification failed. Please try again.")
     job = get_specificJobData_from_db(id)
