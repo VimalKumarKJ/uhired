@@ -35,6 +35,7 @@ def get_job(id):
 def apply_job(id):
     data = request.form
     hcaptcha_response = request.form.get('h-captcha-response')
+    print(hcaptcha_response)
     if not verify_hcaptcha(hcaptcha_response):
        return render_template('error.html', message="hCaptcha verification failed. Please try again.")
     job = get_specificJobData_from_db(id)
