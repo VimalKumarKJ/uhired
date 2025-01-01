@@ -15,9 +15,18 @@ DATABASE_URL = f"postgresql+psycopg2://{USER}:{PASSWORD}@{HOST}:{PORT}/{DBNAME}?
 engine = create_engine(DATABASE_URL)
 
 def get_jobData_from_db():
-  with engine.connect() as connect:
-    result = connect.execute(text("SELECT * FROM jobs"))
-    jobs= []
-    for row in result.all():
-        jobs.append(dict(row._mapping))
-    return jobs
+    with engine.connect() as connect:
+        result = connect.execute(text("SELECT * FROM jobs ORDER BY id"))
+        jobs = []
+        for row in result:
+            jobs.append(dict(row._mapping))
+        return jobs
+
+def get_specificJobData_from_db(id):
+    with engine.connect() as connect:
+        result = connect.execute(text("SELECT * FROM jobs WHERE id = :id"), {"id": id})
+        row = result.all()
+        if len(row) == 0:
+            return None
+        else:
+            return dict(row[0]._mapping)
