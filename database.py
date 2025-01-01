@@ -30,3 +30,26 @@ def get_specificJobData_from_db(id):
             return None
         else:
             return dict(row[0]._mapping)
+        
+def store_applicant_data(id, userData):
+    with engine.connect() as connect:
+        query = text("""
+            INSERT INTO applicantsdata(
+                job_id, fname, lname, email, phone, expt_salary, start_date, experience, resume
+            ) 
+            VALUES(
+                :jobId, :fname, :lname, :email, :phone, :exptSalary, :startDate, :experience, :resumeLink
+            )
+        """)
+        connect.execute(query, {
+            'jobId': id,
+            'fname': userData['fname'],
+            'lname': userData['lname'],
+            'email': userData['email'],
+            'phone': userData['phone'],
+            'exptSalary': userData['salary'],
+            'startDate': userData['availability'],
+            'experience': userData['experience'],
+            'resumeLink': userData['resume']
+        })
+        connect.commit()

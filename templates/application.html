@@ -1,38 +1,100 @@
 <h3 class="display-5 text-center mb-4">Application Form</h3>
-<form action="/job/{{jobDetail['id']}}/apply" method="POST">
+<form
+  action="/job/{{jobDetail['id']}}/apply"
+  method="POST"
+  enctype="multipart/form-data"
+>
   <div class="mb-3">
     <label for="fname" class="form-label">First Name</label>
-    <input type="text" class="form-control" id="fname" placeholder="John" required />
+    <input
+      type="text"
+      class="form-control"
+      id="fname"
+      name="fname"
+      placeholder="John"
+      required
+    />
   </div>
   <div class="mb-3">
     <label for="lname" class="form-label">Last Name</label>
-    <input type="text" class="form-control" id="lname" placeholder="Doe" required />
+    <input
+      type="text"
+      class="form-control"
+      id="lname"
+      name="lname"
+      placeholder="Doe"
+      required
+    />
   </div>
   <div class="mb-3">
     <label for="email" class="form-label">Email Address</label>
-    <input type="email" class="form-control" id="email" placeholder="john.doe@example.com" required />
+    <input
+      type="email"
+      class="form-control"
+      id="email"
+      name="email"
+      placeholder="john.doe@example.com"
+      required
+    />
   </div>
   <div class="mb-3">
     <label for="phone" class="form-label">Phone Number</label>
-    <input type="tel" class="form-control" id="phone" placeholder="+1 234 567 8901" required />
+    <input
+      type="tel"
+      class="form-control"
+      id="phone"
+      name="phone"
+      placeholder="+1 234 567 8901"
+      required
+    />
   </div>
   <div class="mb-3">
     <label for="salary" class="form-label">Expected Salary (in LPA)</label>
-    <input type="number" class="form-control" id="salary" placeholder="10.0" required />
+    <input
+      type="number"
+      class="form-control"
+      id="salary"
+      name="salary"
+      placeholder="10.0"
+      required
+    />
   </div>
   <div class="mb-3">
     <label for="availability" class="form-label">Available Start Date</label>
-    <input type="date" class="form-control" id="availability" required />
+    <input
+      type="date"
+      class="form-control"
+      id="availability"
+      name="availability"
+      required
+    />
   </div>
   <div class="mb-3">
     <label for="experience" class="form-label">Experience</label>
-    <input type="number" class="form-control" id="experience" placeholder="Enter your year(s) of experience" min="0" required />
+    <input
+      type="number"
+      class="form-control"
+      id="experience"
+      name="experience"
+      placeholder="Enter your year(s) of experience"
+      min="0"
+      required
+    />
   </div>
   <div class="mb-3">
-    <label for="resume" class="form-label">Upload Resume</label>
-    <input class="form-control" type="file" id="resume" accept=".pdf, .doc, .docx" required />
+    <label for="resume" class="form-label">Resume URL</label>
+    <input
+      class="form-control"
+      type="url"
+      id="resume"
+      name="resume"
+      placeholder="Enter the link to your resume"
+      required
+    />
   </div>
   <div class="text-center">
-    <button type="submit" class="btn btn-outline-dark">Submit Application</button>
+    <button type="submit" class="btn btn-outline-dark">
+      Submit Application
+    </button>
   </div>
 </form>
