@@ -1,10 +1,22 @@
+import os
 from flask import Flask, render_template, jsonify, request
 from datetime import date
 from database import get_jobData_from_db, get_specificJobData_from_db, store_applicant_data
 app = Flask(__name__)
 
+H_CAPTCHA_SECRET_KEY = os.getenv("H_CAPTCHA_SECRET_KEY")
+
 current_date = date.today()
 current_year = current_date.year
+
+def verify_hcaptcha(hcaptcha_response):
+    data = {
+        'secret': H_CAPTCHA_SECRET_KEY,
+        'response': hcaptcha_response
+    }
+    response = request.post('https://hcaptcha.com/siteverify', data=data)
+    result = response.json()
+    return result.get('success', False)
 
 @app.route("/")
 def home():
@@ -18,13 +30,12 @@ def get_job(id):
     return render_template('404.html')
   return render_template('jobPage.html', jobDetail = job, year = current_year)
 
-# @app.route("/job/<id>/apply")
-# def apply_job(id):
-#   applicant_data = jsonify(request.args)
-#   return applicant_data
 @app.route("/job/<id>/apply", methods=["POST"])
 def apply_job(id):
     data = request.form
+    hcaptcha_response = request.form.get('h-captcha-response')
+    if not verify_hcaptcha(hcaptcha_response):
+       return render_template('error.html', message="hCaptcha verification failed. Please try again.")
     job = get_specificJobData_from_db(id)
     store_applicant_data(id, data)
     return render_template('applicationSuccess.html', jobDetail=job, user=data)
